@@ -1,0 +1,1243 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sell Your Bus - BusesForSale.com</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+            line-height: 1.6;
+            color: #333;
+        }
+
+        /* Header */
+        header {
+            background: #fff;
+            border-bottom: 1px solid #e0e0e0;
+            padding: 1rem 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .logo {
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: #d32f2f;
+        }
+
+        nav {
+            display: flex;
+            gap: 2rem;
+            align-items: center;
+        }
+
+        nav a {
+            text-decoration: none;
+            color: #333;
+            font-size: 0.95rem;
+        }
+
+        nav a:hover {
+            color: #d32f2f;
+        }
+
+        .nav-phone {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            color: #d32f2f;
+            font-weight: 600;
+            cursor: pointer;
+            padding: 0.5rem 1rem;
+            border: 2px solid #d32f2f;
+            border-radius: 4px;
+            transition: all 0.3s;
+        }
+
+        .nav-phone:hover {
+            background: #d32f2f;
+            color: #fff;
+        }
+
+        /* Hero Section */
+        .hero {
+            background: linear-gradient(135deg, rgba(51, 51, 51, 0.8), rgba(51, 51, 51, 0.8)),
+                        url('assets/topic-hero-background.webp') center/cover;
+            color: #fff;
+            padding: 6rem 2rem;
+            text-align: center;
+            position: relative;
+        }
+
+        .hero h1 {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+            line-height: 1.2;
+        }
+
+        .hero p {
+            font-size: 1.3rem;
+            margin-bottom: 2rem;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .hero-proof {
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+            margin-bottom: 2rem;
+            flex-wrap: wrap;
+        }
+
+        .proof-item {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            font-size: 0.95rem;
+        }
+
+        .checkmark {
+            color: #4caf50;
+            font-size: 1.5rem;
+            font-weight: bold;
+        }
+
+        .cta-button {
+            display: inline-block;
+            padding: 1rem 2.5rem;
+            background: #d32f2f;
+            color: #fff;
+            text-decoration: none;
+            border-radius: 6px;
+            font-size: 1.1rem;
+            font-weight: 600;
+            cursor: pointer;
+            border: none;
+            transition: all 0.3s;
+        }
+
+        .cta-button:hover {
+            background: #b71c1c;
+            transform: translateY(-2px);
+        }
+
+        /* Form Section */
+        .form-section {
+            background: #f9f9f9;
+            padding: 4rem 2rem;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        .form-container {
+            background: #fff;
+            padding: 3rem;
+            border-radius: 8px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        }
+
+        .form-container h2 {
+            font-size: 1.8rem;
+            margin-bottom: 0.5rem;
+            color: #333;
+        }
+
+        .form-container .step-indicator {
+            color: #999;
+            font-size: 0.9rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .form-group {
+            margin-bottom: 1.5rem;
+            display: none;
+        }
+
+        .form-group.active {
+            display: block;
+            animation: slideIn 0.3s ease;
+        }
+
+        @keyframes slideIn {
+            from {
+                opacity: 0;
+                transform: translateY(10px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: 500;
+            color: #333;
+        }
+
+        input[type="text"],
+        input[type="email"],
+        input[type="tel"],
+        input[type="number"],
+        select {
+            width: 100%;
+            padding: 0.75rem;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            font-size: 1rem;
+            font-family: inherit;
+        }
+
+        input:focus,
+        select:focus {
+            outline: none;
+            border-color: #d32f2f;
+            box-shadow: 0 0 0 3px rgba(211, 47, 47, 0.1);
+        }
+
+        /* Selling Paths */
+        .selling-paths {
+            background: #fff;
+            padding: 4rem 2rem;
+        }
+
+        .paths-container {
+            max-width: 1100px;
+            margin: 0 auto;
+        }
+
+        .paths-container h2 {
+            text-align: center;
+            font-size: 2rem;
+            margin-bottom: 3rem;
+        }
+
+        .paths-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+
+        .path-card {
+            background: #f9f9f9;
+            padding: 2rem;
+            border-radius: 8px;
+            border-left: 4px solid #d32f2f;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .path-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+        }
+
+        .path-card h3 {
+            font-size: 1.3rem;
+            margin-bottom: 1rem;
+            color: #d32f2f;
+        }
+
+        .path-card p {
+            color: #666;
+            margin-bottom: 1rem;
+        }
+
+        .path-card ul {
+            list-style: none;
+            padding-left: 0;
+        }
+
+        .path-card li {
+            padding-left: 1.5rem;
+            position: relative;
+            margin-bottom: 0.5rem;
+            color: #666;
+        }
+
+        .path-card li:before {
+            content: "✓";
+            position: absolute;
+            left: 0;
+            color: #4caf50;
+            font-weight: bold;
+        }
+
+        /* Trust Section */
+        .trust-section {
+            background: #fff;
+            padding: 4rem 2rem;
+            border-top: 1px solid #e0e0e0;
+        }
+
+        .trust-container {
+            max-width: 1100px;
+            margin: 0 auto;
+            text-align: center;
+        }
+
+        .trust-container h2 {
+            font-size: 1.8rem;
+            margin-bottom: 2rem;
+        }
+
+        .testimonials {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 2rem;
+        }
+
+        .testimonial {
+            background: #f9f9f9;
+            padding: 2rem;
+            border-radius: 8px;
+        }
+
+        .testimonial-author {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            margin-top: 1rem;
+        }
+
+        .avatar {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background: #d32f2f;
+            color: #fff;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+        }
+
+        .testimonial-text {
+            text-align: left;
+        }
+
+        .author-name {
+            font-weight: 600;
+            font-size: 0.95rem;
+        }
+
+        .author-title {
+            font-size: 0.85rem;
+            color: #999;
+        }
+
+        .rating {
+            color: #ffc107;
+            font-size: 0.9rem;
+            margin-bottom: 1rem;
+        }
+
+        /* George Section */
+        .george-section {
+            background: #f0f0f0;
+            padding: 3rem 2rem;
+            text-align: center;
+        }
+
+        .george-container {
+            max-width: 600px;
+            margin: 0 auto;
+            display: flex;
+            align-items: center;
+            gap: 2rem;
+        }
+
+        .george-avatar {
+            width: 120px;
+            height: 120px;
+            border-radius: 50%;
+            background: #d32f2f;
+            color: #fff;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 3rem;
+            flex-shrink: 0;
+        }
+
+        .george-content h3 {
+            font-size: 1.3rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .george-content p {
+            color: #666;
+            margin-bottom: 1rem;
+        }
+
+        .george-cta {
+            display: inline-block;
+            padding: 0.75rem 1.5rem;
+            background: #d32f2f;
+            color: #fff;
+            text-decoration: none;
+            border-radius: 4px;
+            cursor: pointer;
+            border: none;
+            font-weight: 600;
+        }
+
+        .george-cta:hover {
+            background: #b71c1c;
+        }
+
+        /* How to Sell Section */
+        .how-to-sell {
+            background: #fff;
+            padding: 4rem 2rem;
+            border-top: 1px solid #e0e0e0;
+        }
+
+        .how-to-container {
+            max-width: 1100px;
+            margin: 0 auto;
+        }
+
+        .how-to-container h2 {
+            text-align: center;
+            font-size: 2rem;
+            margin-bottom: 3rem;
+        }
+
+        .steps {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+        }
+
+        .step {
+            text-align: center;
+        }
+
+        .step-number {
+            width: 50px;
+            height: 50px;
+            background: #d32f2f;
+            color: #fff;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            font-weight: bold;
+            margin: 0 auto 1rem;
+        }
+
+        .step h3 {
+            margin-bottom: 0.5rem;
+        }
+
+        .step p {
+            color: #666;
+            font-size: 0.95rem;
+        }
+
+        /* Education Section */
+        .education-section {
+            background: #f9f9f9;
+            padding: 4rem 2rem;
+        }
+
+        .education-container {
+            max-width: 1100px;
+            margin: 0 auto;
+        }
+
+        .education-container h2 {
+            text-align: center;
+            font-size: 2rem;
+            margin-bottom: 2rem;
+        }
+
+        .value-factors {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+        }
+
+        .factor-card {
+            background: #fff;
+            padding: 1.5rem;
+            border-radius: 8px;
+        }
+
+        .factor-card h4 {
+            color: #d32f2f;
+            margin-bottom: 0.5rem;
+        }
+
+        .factor-card p {
+            color: #666;
+            font-size: 0.95rem;
+        }
+
+        /* FAQ Section */
+        .faq-section {
+            background: #fff;
+            padding: 4rem 2rem;
+            border-top: 1px solid #e0e0e0;
+        }
+
+        .faq-container {
+            max-width: 700px;
+            margin: 0 auto;
+        }
+
+        .faq-container h2 {
+            text-align: center;
+            font-size: 2rem;
+            margin-bottom: 2rem;
+        }
+
+        .faq-item {
+            margin-bottom: 1rem;
+            border-bottom: 1px solid #e0e0e0;
+        }
+
+        .faq-question {
+            padding: 1rem;
+            background: #f9f9f9;
+            cursor: pointer;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-radius: 4px;
+            transition: all 0.3s;
+            font-weight: 500;
+        }
+
+        .faq-question:hover {
+            background: #f0f0f0;
+        }
+
+        .faq-toggle {
+            font-size: 1.2rem;
+            color: #d32f2f;
+        }
+
+        .faq-answer {
+            display: none;
+            padding: 1rem;
+            color: #666;
+            background: #fff;
+            border-radius: 4px;
+        }
+
+        .faq-answer.active {
+            display: block;
+            animation: slideIn 0.3s ease;
+        }
+
+        /* Anxiety Section */
+        .anxiety-section {
+            background: #f9f9f9;
+            padding: 4rem 2rem;
+        }
+
+        .anxiety-container {
+            max-width: 1100px;
+            margin: 0 auto;
+        }
+
+        .anxiety-container h2 {
+            text-align: center;
+            font-size: 2rem;
+            margin-bottom: 2rem;
+        }
+
+        .anxiety-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+        }
+
+        .anxiety-item {
+            background: #fff;
+            padding: 2rem;
+            border-radius: 8px;
+            border-top: 3px solid #d32f2f;
+        }
+
+        .anxiety-item h4 {
+            color: #333;
+            margin-bottom: 0.5rem;
+        }
+
+        .anxiety-item p {
+            color: #666;
+            font-size: 0.95rem;
+        }
+
+        /* Mobile Sticky CTA */
+        .mobile-sticky {
+            display: none;
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: #fff;
+            border-top: 1px solid #e0e0e0;
+            padding: 1rem;
+            z-index: 200;
+        }
+
+        .mobile-sticky-content {
+            display: flex;
+            gap: 1rem;
+            max-width: 100%;
+        }
+
+        .mobile-sticky button {
+            flex: 1;
+            padding: 0.75rem;
+            border: none;
+            border-radius: 4px;
+            font-weight: 600;
+            cursor: pointer;
+            font-size: 0.95rem;
+        }
+
+        .mobile-sticky .call-btn {
+            background: #fff;
+            color: #d32f2f;
+            border: 2px solid #d32f2f;
+        }
+
+        .mobile-sticky .cta-btn {
+            background: #d32f2f;
+            color: #fff;
+        }
+
+        /* Footer */
+        footer {
+            background: #333;
+            color: #fff;
+            padding: 3rem 2rem;
+            text-align: center;
+            border-top: 1px solid #e0e0e0;
+        }
+
+        footer p {
+            margin-bottom: 0.5rem;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .hero h1 {
+                font-size: 2rem;
+            }
+
+            .hero p {
+                font-size: 1.1rem;
+            }
+
+            .hero-proof {
+                flex-direction: column;
+                gap: 1rem;
+            }
+
+            .form-container {
+                padding: 1.5rem;
+            }
+
+            nav {
+                gap: 1rem;
+                font-size: 0.85rem;
+            }
+
+            .nav-phone {
+                padding: 0.4rem 0.8rem;
+                font-size: 0.85rem;
+            }
+
+            .paths-grid,
+            .testimonials,
+            .steps,
+            .value-factors,
+            .anxiety-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .george-container {
+                flex-direction: column;
+                text-align: center;
+            }
+
+            .mobile-sticky {
+                display: flex;
+            }
+
+            header {
+                padding: 0.75rem 1rem;
+            }
+
+            .logo {
+                font-size: 1.2rem;
+            }
+        }
+
+        /* Modal */
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 300;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0,0,0,0.5);
+        }
+
+        .modal.active {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .modal-content {
+            background-color: #fff;
+            padding: 2rem;
+            border-radius: 8px;
+            max-width: 500px;
+            width: 90%;
+            text-align: center;
+        }
+
+        .modal-content h3 {
+            margin-bottom: 1rem;
+            font-size: 1.5rem;
+        }
+
+        .modal-content p {
+            color: #666;
+            margin-bottom: 1.5rem;
+        }
+
+        .close-modal {
+            background: #d32f2f;
+            color: #fff;
+            padding: 0.75rem 1.5rem;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-weight: 600;
+        }
+
+        .close-modal:hover {
+            background: #b71c1c;
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <div class="logo">🚌 BusesForSale</div>
+        <nav>
+            <a href="#" onclick="trackEvent('sell_ab_faq_open'); return false;">FAQs</a>
+            <a href="#" onclick="trackEvent('sell_ab_george_click'); scrollToGeorge(); return false;">Ask George</a>
+            <span class="nav-phone" onclick="trackEvent('sell_ab_phone_click'); callPhone();">📞 (555) 123-4567</span>
+        </nav>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <h1>Sell your bus without chasing buyers</h1>
+        <p>Get a free valuation in 2 minutes. We handle the rest.</p>
+        <div class="hero-proof">
+            <div class="proof-item">
+                <span class="checkmark">✓</span>
+                <span>Instant valuation</span>
+            </div>
+            <div class="proof-item">
+                <span class="checkmark">✓</span>
+                <span>Multiple selling options</span>
+            </div>
+        </div>
+        <button class="cta-button" onclick="trackEvent('sell_ab_hero_cta_click'); scrollToForm();">
+            Get My Free Valuation
+        </button>
+    </section>
+
+    <!-- Trust Section (moved above form) -->
+    <section class="trust-section">
+        <div class="trust-container">
+            <h2>Trusted by Sellers</h2>
+            <div class="testimonials">
+                <div class="testimonial">
+                    <div class="rating">⭐⭐⭐⭐⭐</div>
+                    <p>"BFS gave me a fair offer in just two weeks. No haggling, no games. Highly recommend."</p>
+                    <div class="testimonial-author">
+                        <div class="avatar">MJ</div>
+                        <div class="testimonial-text">
+                            <div class="author-name">Marcus Johnson</div>
+                            <div class="author-title">School District Fleet Manager</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="testimonial">
+                    <div class="rating">⭐⭐⭐⭐⭐</div>
+                    <p>"I had five buses to move. BFS coordinated everything. Transparent pricing, fast close."</p>
+                    <div class="testimonial-author">
+                        <div class="avatar">RL</div>
+                        <div class="testimonial-text">
+                            <div class="author-name">Rebecca Liu</div>
+                            <div class="author-title">Transit Company Owner</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="testimonial">
+                    <div class="rating">⭐⭐⭐⭐⭐</div>
+                    <p>"Listed my bus. Got three inquiries in a week. Sold at asking price!"</p>
+                    <div class="testimonial-author">
+                        <div class="avatar">DK</div>
+                        <div class="testimonial-text">
+                            <div class="author-name">Derek Kim</div>
+                            <div class="author-title">Independent Operator</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Form Section -->
+    <section class="form-section" id="form-section">
+        <div class="form-container">
+            <h2>Tell us about your bus</h2>
+            <div class="step-indicator">Step <span id="step-num">1</span> of 2</div>
+
+            <form id="valuation-form">
+                <!-- Step 1 -->
+                <div class="form-group active" id="step-1">
+                    <label for="bus-year">What year is your bus?</label>
+                    <input type="number" id="bus-year" name="year" placeholder="2015" min="1990" max="2026" required>
+
+                    <label for="bus-make" style="margin-top: 1.5rem;">Make</label>
+                    <select id="bus-make" name="make" required>
+                        <option value="">Select make...</option>
+                        <option value="thomas">Thomas Built Buses</option>
+                        <option value="blue-bird">Blue Bird</option>
+                        <option value="ic-school">IC Bus / School Bus</option>
+                        <option value="freightliner">Freightliner</option>
+                        <option value="mci">MCI</option>
+                        <option value="prevost">Prevost</option>
+                        <option value="other">Other</option>
+                    </select>
+
+                    <label for="bus-model" style="margin-top: 1.5rem;">Model</label>
+                    <input type="text" id="bus-model" name="model" placeholder="e.g., Vision, Skoolie, Marathon" required>
+
+                    <button type="button" class="cta-button" style="width: 100%; margin-top: 2rem;" onclick="trackEvent('sell_ab_form_step_1_complete'); nextStep();">
+                        Continue
+                    </button>
+                </div>
+
+                <!-- Step 2 -->
+                <div class="form-group" id="step-2">
+                    <label for="bus-mileage">Mileage</label>
+                    <input type="number" id="bus-mileage" name="mileage" placeholder="120000" required>
+
+                    <label for="seller-zip" style="margin-top: 1.5rem;">ZIP Code</label>
+                    <input type="text" id="seller-zip" name="zip" placeholder="12345" required>
+
+                    <label for="seller-email" style="margin-top: 1.5rem;">Email</label>
+                    <input type="email" id="seller-email" name="email" placeholder="you@example.com" required>
+
+                    <label for="seller-phone" style="margin-top: 1.5rem;">Phone Number</label>
+                    <input type="tel" id="seller-phone" name="phone" placeholder="(555) 123-4567" required>
+
+                    <label for="seller-type" style="margin-top: 1.5rem;">Seller Type</label>
+                    <select id="seller-type" name="seller_type" required>
+                        <option value="">Select...</option>
+                        <option value="individual">Individual</option>
+                        <option value="fleet-operator">Fleet Operator</option>
+                        <option value="dealership">Dealership</option>
+                        <option value="school-district">School District</option>
+                        <option value="other">Other</option>
+                    </select>
+
+                    <div style="display: flex; gap: 1rem; margin-top: 2rem;">
+                        <button type="button" class="cta-button" style="flex: 1; background: #999;" onclick="prevStep();">
+                            Back
+                        </button>
+                        <button type="submit" class="cta-button" style="flex: 1;" onclick="trackEvent('sell_ab_form_submit');">
+                            Submit
+                        </button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </section>
+
+    <!-- Selling Paths Section -->
+    <section class="selling-paths">
+        <div class="paths-container">
+            <h2>Choose your selling path</h2>
+            <div class="paths-grid">
+                <div class="path-card" onclick="trackEvent('sell_ab_path_cash_selected'); selectPath('Cash Offer');">
+                    <h3>💰 Cash Offer</h3>
+                    <p>We buy it directly.</p>
+                    <ul>
+                        <li>Fast close (7-14 days)</li>
+                        <li>No broker fees</li>
+                        <li>Hassle-free inspection</li>
+                        <li>We handle paperwork</li>
+                    </ul>
+                </div>
+                <div class="path-card" onclick="trackEvent('sell_ab_path_listing_selected'); selectPath('Free Listing');">
+                    <h3>📋 Free Listing</h3>
+                    <p>We list it for you.</p>
+                    <ul>
+                        <li>Larger audience</li>
+                        <li>Buyer inquiry support</li>
+                        <li>No listing fees ever</li>
+                        <li>Sell on your timeline</li>
+                    </ul>
+                </div>
+                <div class="path-card" onclick="trackEvent('sell_ab_path_fleet_selected'); selectPath('Fleet Liquidation');">
+                    <h3>🚌 Fleet Liquidation</h3>
+                    <p>Selling multiple units?</p>
+                    <ul>
+                        <li>Dedicated account manager</li>
+                        <li>Bulk pricing advantage</li>
+                        <li>Coordinated logistics</li>
+                        <li>Custom payment terms</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- How to Sell Section -->
+    <section class="how-to-sell">
+        <div class="how-to-container">
+            <h2>How BFS helps you sell</h2>
+            <div class="steps">
+                <div class="step">
+                    <div class="step-number">1</div>
+                    <h3>Submit Info</h3>
+                    <p>Tell us about your bus in 2 minutes. We use real market data to estimate value.</p>
+                </div>
+                <div class="step">
+                    <div class="step-number">2</div>
+                    <h3>We Review</h3>
+                    <p>Our team inspects photos and details. We'll offer cash or help you list for free.</p>
+                </div>
+                <div class="step">
+                    <div class="step-number">3</div>
+                    <h3>You Get Paid</h3>
+                    <p>We handle paperwork, title transfer, and logistics. You focus on what's next.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Value Factors Education -->
+    <section class="education-section">
+        <div class="education-container">
+            <h2>What affects your bus value?</h2>
+            <div class="value-factors">
+                <div class="factor-card">
+                    <h4>🏭 Age & Mileage</h4>
+                    <p>Newer buses with lower mileage command premium prices. We adjust for both.</p>
+                </div>
+                <div class="factor-card">
+                    <h4>🔧 Condition & Maintenance</h4>
+                    <p>Engine hours, transmission type, and service records matter. Transparency pays.</p>
+                </div>
+                <div class="factor-card">
+                    <h4>🎨 Customization & Features</h4>
+                    <p>Conversions, special seating, or RV upgrades can increase value significantly.</p>
+                </div>
+                <div class="factor-card">
+                    <h4>📍 Market Demand</h4>
+                    <p>Your location and bus type affect buyer interest. School buses peak in summer.</p>
+                </div>
+                <div class="factor-card">
+                    <h4>📄 Documentation</h4>
+                    <p>Clear title, service logs, and inspection reports boost buyer confidence.</p>
+                </div>
+                <div class="factor-card">
+                    <h4>🚗 Comparables</h4>
+                    <p>We track what similar buses sold for in your market and adjust our offer.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Seller Anxiety Section -->
+    <section class="anxiety-section">
+        <div class="anxiety-container">
+            <h2>Common seller concerns—solved</h2>
+            <div class="anxiety-grid">
+                <div class="anxiety-item">
+                    <h4>❓ What if my bus has issues?</h4>
+                    <p>We buy buses as-is. No need for expensive repairs. Disclose conditions honestly, and we'll make a fair offer.</p>
+                </div>
+                <div class="anxiety-item">
+                    <h4>🔍 What happens in inspection?</h4>
+                    <p>We check mechanical, safety, and title status. Takes 1-2 hours. You get a detailed report and our best offer.</p>
+                </div>
+                <div class="anxiety-item">
+                    <h4>⏱️ How long does this take?</h4>
+                    <p>Valuation: 24 hours. Inspection: 48 hours. Close: 7-14 days. Listing path is on your timeline.</p>
+                </div>
+                <div class="anxiety-item">
+                    <h4>💵 How do I get paid?</h4>
+                    <p>Bank wire, cashier's check, or ACH transfer. You choose. Funds transfer same day as title sign-off.</p>
+                </div>
+                <div class="anxiety-item">
+                    <h4>📃 Title & paperwork hassles?</h4>
+                    <p>We handle it all. Lien payoff, title transfer, and registration paperwork are our responsibility.</p>
+                </div>
+                <div class="anxiety-item">
+                    <h4>🤝 Can I negotiate the offer?</h4>
+                    <p>Absolutely. If you provide new info or documentation, we'll reassess. Fair deals work both ways.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- George Section -->
+    <section class="george-section" id="george-section">
+        <div class="george-container">
+            <div class="george-avatar">G</div>
+            <div class="george-content">
+                <h3>Need personalized guidance?</h3>
+                <p>George has 15+ years in bus sales. He'll walk you through every step and answer tough questions.</p>
+                <button class="george-cta" onclick="trackEvent('sell_ab_george_click'); callPhone();">
+                    📞 Talk to George
+                </button>
+            </div>
+        </div>
+    </section>
+
+    <!-- FAQ Section -->
+    <section class="faq-section">
+        <div class="faq-container">
+            <h2>Frequently asked questions</h2>
+            
+            <div class="faq-item">
+                <div class="faq-question" onclick="toggleFaq(this)">
+                    <span>Do I need a clear title to sell?</span>
+                    <span class="faq-toggle">+</span>
+                </div>
+                <div class="faq-answer">
+                    <p>A clear title is ideal, but not required. If there's a lien, we can work with your lender to coordinate payoff. Some states allow conditional sale, which we also accept.</p>
+                </div>
+            </div>
+
+            <div class="faq-item">
+                <div class="faq-question" onclick="toggleFaq(this)">
+                    <span>What if the bus is financed?</span>
+                    <span class="faq-toggle">+</span>
+                </div>
+                <div class="faq-answer">
+                    <p>No problem. We'll coordinate with your lender and ensure the payoff happens at closing. You receive the difference, or we handle a shortfall arrangement.</p>
+                </div>
+            </div>
+
+            <div class="faq-item">
+                <div class="faq-question" onclick="toggleFaq(this)">
+                    <span>Can I sell a bus that's currently in operation?</span>
+                    <span class="faq-toggle">+</span>
+                </div>
+                <div class="faq-answer">
+                    <p>Yes. Many fleet operators do this. We'll coordinate timing so you can phase out the bus without disrupting service. Flexible scheduling available.</p>
+                </div>
+            </div>
+
+            <div class="faq-item">
+                <div class="faq-question" onclick="toggleFaq(this)">
+                    <span>What documents do I need to bring?</span>
+                    <span class="faq-toggle">+</span>
+                </div>
+                <div class="faq-answer">
+                    <p>Bring: title, registration, maintenance records, and VIN plate. If financed, your loan paperwork. We'll prepare the rest of the paperwork together.</p>
+                </div>
+            </div>
+
+            <div class="faq-item">
+                <div class="faq-question" onclick="toggleFaq(this)">
+                    <span>Are you open to multi-bus deals?</span>
+                    <span class="faq-toggle">+</span>
+                </div>
+                <div class="faq-answer">
+                    <p>Absolutely. Selling 2-20 buses? We offer fleet pricing, dedicated account managers, and flexible payment terms. Talk to George for a custom quote.</p>
+                </div>
+            </div>
+
+            <div class="faq-item">
+                <div class="faq-question" onclick="toggleFaq(this)">
+                    <span>How is your valuation calculated?</span>
+                    <span class="faq-toggle">+</span>
+                </div>
+                <div class="faq-answer">
+                    <p>We use real market comparables, depreciation schedules, condition adjustments, and regional demand data. Inspection may refine the estimate.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <p>&copy; 2026 BusesForSale.com. All rights reserved.</p>
+        <p>📍 Serving the entire USA | 📞 (555) 123-4567 | 📧 sellers@busesforsale.com</p>
+    </footer>
+
+    <!-- Mobile Sticky CTA -->
+    <div class="mobile-sticky">
+        <div class="mobile-sticky-content">
+            <button class="call-btn" onclick="trackEvent('sell_ab_phone_click'); callPhone();">📞 Call</button>
+            <button class="cta-btn" onclick="trackEvent('sell_ab_hero_cta_click'); scrollToForm();">Get Valuation</button>
+        </div>
+    </div>
+
+    <!-- Modal -->
+    <div class="modal" id="modal">
+        <div class="modal-content">
+            <h3 id="modal-title">Thank You!</h3>
+            <p id="modal-message">Your information has been received. We'll review your bus and contact you within 24 hours with a valuation and next steps.</p>
+            <button class="close-modal" onclick="closeModal()">Close</button>
+        </div>
+    </div>
+
+    <script>
+        // Event tracking
+        function trackEvent(eventName) {
+            console.log('GA4 Event:', eventName);
+            // In production, send to Google Analytics:
+            // gtag('event', eventName);
+        }
+
+        // Form steps
+        let currentStep = 1;
+
+        function nextStep() {
+            const year = document.getElementById('bus-year').value;
+            const make = document.getElementById('bus-make').value;
+            const model = document.getElementById('bus-model').value;
+
+            if (!year || !make || !model) {
+                alert('Please fill in all fields');
+                return;
+            }
+
+            document.getElementById('step-1').classList.remove('active');
+            document.getElementById('step-2').classList.add('active');
+            document.getElementById('step-num').textContent = '2';
+            currentStep = 2;
+        }
+
+        function prevStep() {
+            document.getElementById('step-2').classList.remove('active');
+            document.getElementById('step-1').classList.add('active');
+            document.getElementById('step-num').textContent = '1';
+            currentStep = 1;
+        }
+
+        // Form submission
+        document.getElementById('valuation-form').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            const formData = {
+                year: document.getElementById('bus-year').value,
+                make: document.getElementById('bus-make').value,
+                model: document.getElementById('bus-model').value,
+                mileage: document.getElementById('bus-mileage').value,
+                zip: document.getElementById('seller-zip').value,
+                email: document.getElementById('seller-email').value,
+                phone: document.getElementById('seller-phone').value,
+                seller_type: document.getElementById('seller-type').value,
+            };
+
+            console.log('Form submitted:', formData);
+            // In production, send to CRM/backend:
+            // fetch('/api/seller-leads', { method: 'POST', body: JSON.stringify(formData) })
+
+            showModal('Thank You!', 'Your valuation request has been received. Our team will contact you within 24 hours with an offer and next steps.');
+            this.reset();
+            prevStep();
+        });
+
+        // FAQ toggles
+        function toggleFaq(element) {
+            const answer = element.nextElementSibling;
+            const toggle = element.querySelector('.faq-toggle');
+
+            // Close other FAQs
+            document.querySelectorAll('.faq-answer').forEach(item => {
+                if (item !== answer) {
+                    item.classList.remove('active');
+                    item.previousElementSibling.querySelector('.faq-toggle').textContent = '+';
+                }
+            });
+
+            answer.classList.toggle('active');
+            toggle.textContent = answer.classList.contains('active') ? '−' : '+';
+            trackEvent('sell_ab_faq_open');
+        }
+
+        // Path selection
+        function selectPath(path) {
+            console.log('Path selected:', path);
+            // Track CRM field: seller_path = cash/listing/fleet/etc
+        }
+
+        // Scroll to form
+        function scrollToForm() {
+            document.getElementById('form-section').scrollIntoView({ behavior: 'smooth' });
+        }
+
+        // Scroll to George
+        function scrollToGeorge() {
+            document.getElementById('george-section').scrollIntoView({ behavior: 'smooth' });
+        }
+
+        // Call phone
+        function callPhone() {
+            window.location.href = 'tel:+15551234567';
+        }
+
+        // Modal
+        function showModal(title, message) {
+            document.getElementById('modal-title').textContent = title;
+            document.getElementById('modal-message').textContent = message;
+            document.getElementById('modal').classList.add('active');
+        }
+
+        function closeModal() {
+            document.getElementById('modal').classList.remove('active');
+        }
+
+        // Close modal on outside click
+        document.getElementById('modal').addEventListener('click', function(e) {
+            if (e.target === this) {
+                closeModal();
+            }
+        });
+
+        // Track initial page view
+        trackEvent('sell_ab_page_view');
+    </script>
+</body>
+</html>
